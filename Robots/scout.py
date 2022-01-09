@@ -24,31 +24,31 @@ class Scout(Robot): #Create a Robot
         
     
     def run(self): #NECESARY FOR THE GAME  main loop to command the bot
-        
-        
-        self.move(4) # for moving (negative values go back)
-        self.turn(360) #for turning (negative values turn counter-clockwise)
-        self.stop()
-        """
-        the stop command is used to make moving sequences: here the robot will move 90steps and turn 360° at the same time
-        and next, fire
-        """
-        
-        
-        # self.fire(3) # To Fire (power between 1 and 10)
-        
-        self.move(4)
-        self.turn(50)
-        self.stop()
-        # bulletId = self.fire(2) #to let you you manage if the bullet hit or fail
-        self.move(4)
-        self.turn(180)
-        self.gunTurn(90) #to turn the gun (negative values turn counter-clockwise)
-        self.stop()
-        # self.fire(1) # To Fire (power between 1 and 10)
-        self.radarTurn(180) #to turn the radar (negative values turn counter-clockwise)
-        self.stop()
-        
+
+        self.radarTurn(40)
+        # self.move(4) # for moving (negative values go back)
+        # self.turn(360) #for turning (negative values turn counter-clockwise)
+        # self.stop()
+        # """
+        # the stop command is used to make moving sequences: here the robot will move 90steps and turn 360° at the same time
+        # and next, fire
+        # """
+        #
+        #
+        # # self.fire(3) # To Fire (power between 1 and 10)
+        #
+        # self.move(4)
+        # self.turn(50)
+        # self.stop()
+        # # bulletId = self.fire(2) #to let you you manage if the bullet hit or fail
+        # self.move(4)
+        # self.turn(180)
+        # self.gunTurn(90) #to turn the gun (negative values turn counter-clockwise)
+        # self.stop()
+        # # self.fire(1) # To Fire (power between 1 and 10)
+        # self.radarTurn(40) #to turn the radar (negative values turn counter-clockwise)
+        # self.stop()
+        #
     def sensors(self):  #NECESARY FOR THE GAME
         """Tick each frame to have datas about the game"""
         
@@ -81,7 +81,7 @@ class Scout(Robot): #Create a Robot
     def onHitByBullet(self, bulletBotId, bulletBotName, bulletPower): #NECESARY FOR THE GAME
         """ When i'm hit by a bullet"""
         self.reset()#To reset the run fonction to the begining (auomatically called on hitWall, and robotHit event)
-        self.move(4)
+        # self.move(4)
 
 
         self.rPrint ("hit by " + str(bulletBotName) + "with power:" +str( bulletPower))
@@ -117,6 +117,34 @@ class Scout(Robot): #Create a Robot
         c3 = bot_color[2] + random.randrange(-dist_calc, dist_calc)
         clf=joblib.load('./model.sav')
         predicted_bot=clf.predict(np.asarray((c1, c2, c3)).reshape(1, -1))
+        print(predicted_bot)
+        if predicted_bot=='t800':
+            self.turn(90)
+            self.move(4)
+            self.move(4)
+            self.move(4)
+            self.move(4)
+            self.move(4)
+            self.move(4)
+        elif predicted_bot=='charlier':
+            self.turn(90)
+            self.move(-4)
+            self.move(-4)
+            self.move(-4)
+            self.move(-4)
+            self.move(-4)
+            self.move(-4)
+        else:
+            self.fire(3)
+            self.fire(3)
+            self.fire(3)
+            self.fire(3)
+            self.fire(3)
+            self.fire(3)
+
+
+
+
 
 
         self.rPrint("I see the bot:" + str(botId) + "on position: x:" + str(botPos.x()) + " , y:" + str(botPos.y()))
