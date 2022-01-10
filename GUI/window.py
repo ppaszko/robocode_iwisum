@@ -78,7 +78,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.graphicsView.setScene(self.scene)
         self.scene.AddRobots(self.botList)
         self.timer.timeout.connect(self.scene.advance)
-        self.timer.start((self.horizontalSlider.value()**2)/100.0)
+        self.timer.start((self.horizontalSlider.value()**2)//100)
         self.resizeEvent()
     
     @pyqtSlot(int)
