@@ -86,7 +86,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """
         Slot documentation goes here.
         """
-        self.timer.setInterval((value**2)/100.0)
+        self.timer.setInterval(int((value**2)/100))
     
     @pyqtSlot()
     def on_actionNew_triggered(self):
